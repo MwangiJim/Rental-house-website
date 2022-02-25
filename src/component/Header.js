@@ -2,14 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee,faBars } from '@fortawesome/free-solid-svg-icons'
+import {getAuth} from 'firebase/auth'
 
 function Header() {
+  let auth = getAuth()
   let [menu,setMenu] = React.useState(false)
   let styles = {
     right:menu?'0px':'-300px',
   }
 function ToggleMenu(){
   setMenu(prevState => !prevState)
+}
+function SignOut(){
+  auth.signOut()
 }
   return(
        <NavBar>
@@ -18,7 +23,7 @@ function ToggleMenu(){
                  <li><a href='/'>About</a></li>
                  <li><a href=''>Homes</a></li>
                  <li><a href='/rentals'>Rentals</a></li>
-                  <button>Contact Us</button>
+                  <button onClick={SignOut}>Log out</button>
              </Navlinks>
              <FontAwesomeIcon icon ={faBars} className = 'MenuBar' onClick = {ToggleMenu}/>
        </NavBar>
@@ -37,7 +42,7 @@ let NavBar = styled.div`
   top:0;
   left:0;
   position:fixed;
-  z-index:5;
+  z-index:100;
   width:100%;
   img{
       width:100px;
@@ -55,13 +60,13 @@ let NavBar = styled.div`
   }
   .MenuBar{
     font-size:30px;
-    margin:0 10px;
+    margin:0 20px;
     cursor:pointer;
     display:none;
     color:#fff;
     @media(max-width:400px){
       display:block;
-      z-index:15;
+      z-index:115;
     }
   }
 `
@@ -99,7 +104,7 @@ let Navlinks = styled.div`
     right:-300px;
     top:0;
     position:fixed;
-    z-index:10;
+    z-index:110;
        li{
          display:block;
          margin:20px 0;
