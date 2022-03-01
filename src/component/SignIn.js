@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { getAuth, signInWithEmailAndPassword, } from 'firebase/auth';
 
-function SignIn() {
+function SignIn(props) {
     let auth = getAuth()
     let [SignInForm,setSignInForm] = React.useState({
         email:"",
@@ -42,6 +42,7 @@ function SignIn() {
      <Container style={styles}>
         <SigninPad>
             <h1>Sign In</h1>
+            <h3>{props.state}</h3>
             <form onSubmit={handleForm}>
                 <input
                  type='email'

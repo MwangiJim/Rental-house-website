@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import{getAuth,createUserWithEmailAndPassword,onAuthStateChanged,updateProfile} from 'firebase/auth'
 import { db } from '../firebase'
 
-function LoginPad(props) {
+function LoginPad() {
   const auth = getAuth()
     let[formData,setFormData] = React.useState({
         username:'',
@@ -20,22 +20,6 @@ function LoginPad(props) {
            }
        })
     }
-    React.useEffect(()=>{
-     const subscribe = onAuthStateChanged(auth,(AuthUser)=>{
-          if(AuthUser){
-            console.log(AuthUser)
-            console.log('user logged in!!')
-            props.handler(AuthUser)
-          }
-          else{
-            console.log('user logged out!!!')
-            props.handler(null)
-          }
-        })
-        return ()=>{
-          subscribe()
-        }
-    },[props.name,formData.username])
     function Handleform(e){
         e.preventDefault()
         if(formData.email,formData.password,formData.username){
