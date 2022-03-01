@@ -5,16 +5,12 @@ import { faCoffee,faBars } from '@fortawesome/free-solid-svg-icons'
 import {getAuth} from 'firebase/auth'
 
 function Header() {
-  let auth = getAuth()
   let [menu,setMenu] = React.useState(false)
   let styles = {
     right:menu?'0px':'-300px',
   }
 function ToggleMenu(){
   setMenu(prevState => !prevState)
-}
-function SignOut(){
-  auth.signOut()
 }
   return(
        <NavBar>
@@ -23,7 +19,6 @@ function SignOut(){
                  <li><a href='/'>About</a></li>
                  <li><a href=''>Homes</a></li>
                  <li><a href='/rentals'>Rentals</a></li>
-                  <button onClick={SignOut}>Log out</button>
              </Navlinks>
              <FontAwesomeIcon icon ={faBars} className = 'MenuBar' onClick = {ToggleMenu}/>
        </NavBar>
